@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 using ShipManagementService.Core.Models;
 
 namespace ShipManagementService.Infrastructure.Database
