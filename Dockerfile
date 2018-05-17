@@ -3,16 +3,16 @@ WORKDIR /app
 
 # Copy the project file
 COPY *.sln ./
-COPY InvoiceService.App/*.csproj ./InvoiceService.App/
-COPY InvoiceService.Core/*.csproj ./InvoiceService.Core/
-COPY InvoiceService.Infrastructure/*.csproj ./InvoiceService.Infrastructure/
+COPY ShipManagementService.App/*.csproj ./ShipManagementService.App/
+COPY ShipManagementService.Core/*.csproj ./ShipManagementService.Core/
+COPY ShipManagementService.Infrastructure/*.csproj ./ShipManagementService.Infrastructure/
 
 # Restore the packages
 RUN dotnet restore
 
 # Copy everything else
 COPY . ./
-WORKDIR /app/InvoiceService.App
+WORKDIR /app/ShipManagementService.App
 
 FROM build AS publish
 # Build the release
@@ -23,6 +23,6 @@ FROM microsoft/aspnetcore:2.0 AS runtime
 WORKDIR /app
 
 # Copy the output from the build env
-COPY --from=publish /app/InvoiceService.App/out ./
+COPY --from=publish /app/ShipManagementService.App/out ./
 
-ENTRYPOINT [ "dotnet", "InvoiceService.App.dll" ]
+ENTRYPOINT [ "dotnet", "ShipManagementService.App.dll" ]
