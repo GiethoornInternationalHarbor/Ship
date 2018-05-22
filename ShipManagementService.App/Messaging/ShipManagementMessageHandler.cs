@@ -93,8 +93,6 @@ namespace ShipManagementService.App.Messaging
         {
             var Service = JsonSerializer.Deserialize<Service>(message);
 
-            await _messagePublisher.PublishMessageAsync(MessageTypes.ServiceRequested, Service);
-
             await _serviceRepository.CreateShipService(Service);
 
             return true;
