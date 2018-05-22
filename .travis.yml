@@ -9,7 +9,7 @@ install: []
 
 env:
   global:
-    - IMAGE_NAME=giethoorninternationalharbor/ShipManagementService
+    - IMAGE_NAME=giethoorninternationalharbor/shipmanagementservice
     - COMMIT=${TRAVIS_COMMIT::8}
 
 before_script:
