@@ -35,9 +35,7 @@ namespace ShipManagementService.App
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            IConfiguration config = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .Build();
+            IConfiguration config = new ConfigurationBuilder().AddEnvironmentVariables().Build();
 
             DIHelper.Setup(services, config);
 

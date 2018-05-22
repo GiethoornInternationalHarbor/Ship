@@ -1,5 +1,7 @@
-﻿using ShipManagementService.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ShipManagementService.Core.Models;
 using ShipManagementService.Core.Repositories;
+using ShipManagementService.Infrastructure.Database;
 using System;
 using System.Threading.Tasks;
 
@@ -7,24 +9,42 @@ namespace ShipManagementService.Infrastructure.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public Task<Customer> CreateCustomerAsync(Customer customer)
+
+        private readonly ShipManagementDbContextFactory _shipManagementDbFactory;
+
+        public CustomerRepository(ShipManagementDbContextFactory shipManagementDbFactory)
         {
-            throw new NotImplementedException();
+            _shipManagementDbFactory = shipManagementDbFactory;
         }
 
-        public Task<Customer> DeleteCustomerAsync(Customer customer)
+        public async Task<Customer> CreateCustomerAsync(Customer customer)
         {
-            throw new NotImplementedException();
+            ShipManagementDbContext dbContext = _shipManagementDbFactory.CreateDbContext();
+			var customerToAdd = (await dbContext.Customers.AddAsync(customer)).Entity;
+			await dbContext.SaveChangesAsync();
+			return customerToAdd;
+        }
+
+        public async Task<Customer> DeleteCustomerAsync(Customer customer)
+        {
+            ShipManagementDbContext dbContext = _shipManagementDbFactory.CreateDbContext();
+            var DeletedCustomer = dbContext.Customers.Remove(customer);
+            await dbContext.SaveChangesAsync();
+            return DeletedCustomer.Entity;
         }
 
         public Task<Customer> GetCustomerAsync(string email)
         {
-            throw new NotImplementedException();
+            ShipManagementDbContext dbContext = _shipManagementDbFactory.CreateDbContext();
+            return dbContext.Customers.LastOrDefaultAsync(x => x.Email == email);
         }
 
-        public Task<Customer> UpdateCustomerAsync(Customer customer)
+        public async Task<Customer> UpdateCustomerAsync(Customer customer)
         {
-            throw new NotImplementedException();
+            ShipManagementDbContext dbContext = _shipManagementDbFactory.CreateDbContext();
+            var updatedCustomer = dbContext.Customers.Update(customer);
+            await dbContext.SaveChangesAsync();
+            return updatedCustomer.Entity;
         }
     }
 }

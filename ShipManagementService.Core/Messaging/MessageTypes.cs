@@ -4,6 +4,8 @@
     {
         Unknown,
         ServiceRequested,
+        ShipUndockRequested,
+        ShipNearingHarbor,
         CustomerCreated,
         CustomerUpdated,
         CustomerDeleted,

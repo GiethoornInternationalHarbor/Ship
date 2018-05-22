@@ -93,6 +93,8 @@ namespace ShipManagementService.App.Messaging
         {
             var Service = JsonSerializer.Deserialize<Service>(message);
 
+            await _messagePublisher.PublishMessageAsync(MessageTypes.ServiceRequested, Service);
+
             await _serviceRepository.CreateShipService(Service);
 
             return true;
@@ -119,18 +121,22 @@ namespace ShipManagementService.App.Messaging
 
         private async Task<bool> HandleShipDocked(string message)
         {
-            var ship = JsonSerializer.Deserialize<Ship>(message);
+            var Ship = JsonSerializer.Deserialize<Ship>(message);
 
-            await _shipRepository.CreateShip(ship);
+            await _messagePublisher.PublishMessageAsync(MessageTypes.ShipDocked, Ship.Id);
+
+            await _shipRepository.CreateShip(Ship);
 
             return true;
         }
 
         private async Task<bool> HandleShipUndocked(string message)
         {
-            var ship = JsonSerializer.Deserialize<Ship>(message);
+            var Ship = JsonSerializer.Deserialize<Ship>(message);
 
-            await _shipRepository.DeleteShip(ship.Id);
+            await _messagePublisher.PublishMessageAsync(MessageTypes.ShipUndocked, Ship.Id);
+
+            await _shipRepository.DeleteShip(Ship.Id);
 
             return true;
         }

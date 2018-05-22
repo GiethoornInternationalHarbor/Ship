@@ -1,5 +1,7 @@
-﻿using ShipManagementService.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ShipManagementService.Core.Models;
 using ShipManagementService.Core.Repositories;
+using ShipManagementService.Infrastructure.Database;
 using System;
 using System.Threading.Tasks;
 
@@ -7,19 +9,35 @@ namespace ShipManagementService.Infrastructure.Repositories
 {
     public class ServiceRepository : IServiceRepository
     {
-        public Task<Service> CreateShipService(Service shipService)
+        private readonly ShipManagementDbContextFactory _shipManagementDbContextFactory;
+        
+        public ServiceRepository(ShipManagementDbContextFactory shipManagementDbContextFactory)
         {
-            throw new NotImplementedException();
+            _shipManagementDbContextFactory = shipManagementDbContextFactory;
         }
 
-        public Task DeleteShipService(Guid id)
+        public async Task<Service> CreateShipService(Service shipService)
         {
-            throw new NotImplementedException();
+            ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
+            var CreatingShipService = (await dbContext.Service.AddAsync(shipService)).Entity;
+            await dbContext.SaveChangesAsync();
+            return CreatingShipService;
         }
 
-        public Task<Service> UpdateShipService(Service shipService)
+        public async Task<Service> UpdateShipService(Service shipService)
         {
-            throw new NotImplementedException();
+            ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
+            var updatedShipService = dbContext.Service.Update(shipService);
+            await dbContext.SaveChangesAsync();
+            return updatedShipService.Entity;
+        }
+
+        public async Task DeleteShipService(Guid id)
+        {
+            ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
+            var DeletingShipService = new Service() { Id = id };
+            dbContext.Entry(DeletingShipService).State = EntityState.Deleted;
+            await dbContext.SaveChangesAsync();
         }
     }
 }

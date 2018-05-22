@@ -1,4 +1,5 @@
 ﻿using ShipManagementService.Core.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace ShipManagementService.Core.Repositories

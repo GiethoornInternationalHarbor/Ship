@@ -1,16 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 
 namespace ShipManagementService.Infrastructure.Database
 {
-    public class ShipManagementDbContextFactory : IDesignTimeDbContextFactory<ShipManagementDbContext>
-    {
-        public ShipManagementDbContext CreateDbContext(string[] args)
+    public class ShipManagementDbContextFactory 
+    {        
+        /// <summary>
+        /// Gets or sets the connection string.
+        /// </summary>
+        protected string ConnectionString { get; set; }
+
+        public ShipManagementDbContextFactory(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
+
+        /// <summary>
+        /// Creates the database context.
+        /// </summary>
+        /// <returns></returns>
+        public ShipManagementDbContext CreateDbContext()
         {
             var optBuilder = new DbContextOptionsBuilder<ShipManagementDbContext>();
-            optBuilder.UseSqlServer("Server=.\\SQL_2017;Database=ShipManagementService;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optBuilder.UseSqlServer(ConnectionString);
 
             return new ShipManagementDbContext(optBuilder.Options);
-        }
+        }    
     }
 }
