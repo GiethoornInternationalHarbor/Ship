@@ -12,14 +12,13 @@ namespace ShipManagementService.Infrastructure.DI
 {
     public class DIHelper
     {
-
         public static void Setup(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ShipManagementDbContext>(opt => opt.UseSqlServer(configuration.GetSection("DB_CONNECTION_STRING").Value));
 
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IShipRepository, ShipRepository>();
-            services.AddTransient<IServiceRepository, ServiceRepository>();
+            services.AddTransient<IShipServiceRepository, ServiceRepository>();
 
             services.AddSingleton<IMessageHandler, RabbitMQMessageHandler>((provider) => new RabbitMQMessageHandler(configuration.GetSection("AMQP_URL").Value));
             services.AddTransient<IMessagePublisher, RabbitMQMessagePublisher>((provider) => new RabbitMQMessagePublisher(configuration.GetSection("AMQP_URL").Value));

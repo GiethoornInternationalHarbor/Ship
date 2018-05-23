@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ShipManagementService.Core.Repositories
 {
-    public interface IServiceRepository
+    public interface IShipServiceRepository
     {
         /// <summary>
         /// Creates the ship service.

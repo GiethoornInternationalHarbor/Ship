@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace ShipManagementService.App.Controllers
 {   
-    [Route("api/v1/service")]
-    public class ServiceController : ControllerBase
+    [Route("api/shipmanagement")]
+    public class ShipManagementController : ControllerBase
     {
-        private readonly IServiceRequest _iserviceRequest;
+        private readonly IShipManagementService _shipManagementService;
 
-        public ServiceController(IServiceRequest iserviceRequest)
+        public ShipManagementController(IShipManagementService shipManagementService)
         {
-            _iserviceRequest = iserviceRequest;
+            _shipManagementService = shipManagementService;
         }
 
         [HttpPost]
         public async Task<Service> ServiceRequested(Service Service)
         {
-            var Request = await _iserviceRequest.SendServiceRequest(Service);
+            var Request = await _shipManagementService.SendServiceRequest(Service);
             return Request;
         }
     }

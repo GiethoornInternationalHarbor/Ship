@@ -12,22 +12,21 @@ namespace ShipManagementService.Infrastructure.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Email = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
                     PostalCode = table.Column<string>(nullable: false),
                     Residence = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.Email);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Ship",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Email = table.Column<string>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,11 +52,6 @@ namespace ShipManagementService.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Service_ShipId",
-                table: "Service",
-                column: "ShipId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

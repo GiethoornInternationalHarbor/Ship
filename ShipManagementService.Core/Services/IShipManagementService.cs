@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ShipManagementService.Core.Services
 {
-    public interface IServiceRequest
+    public interface IShipManagementService
     {
         Task<Service> SendServiceRequest(Service Service);
     }

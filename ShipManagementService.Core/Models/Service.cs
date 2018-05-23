@@ -6,7 +6,7 @@ namespace ShipManagementService.Core.Models
     public class Service
     {
         /// <summary>
-		/// Gets or sets the identifier.
+        /// Gets or sets the identifier.
 		/// </summary>
 		[Required]
         [Key]

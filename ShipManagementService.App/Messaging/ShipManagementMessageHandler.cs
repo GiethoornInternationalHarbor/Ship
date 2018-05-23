@@ -10,15 +10,15 @@ namespace ShipManagementService.App.Messaging
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IShipRepository _shipRepository;
-        private readonly IServiceRepository _serviceRepository;
+        private readonly IShipServiceRepository _shipServiceRepository;
         private readonly IMessagePublisher _messagePublisher;
         
         public ShipManagementMessageHandler(ICustomerRepository customerRepository, IShipRepository shipRepository, 
-            IServiceRepository serviceRepository, IMessagePublisher messagePublisher)
+            IShipServiceRepository shipServiceRepository, IMessagePublisher messagePublisher)
         {
             _customerRepository = customerRepository;
             _shipRepository = shipRepository;
-            _serviceRepository = serviceRepository;
+            _shipServiceRepository = shipServiceRepository;
             _messagePublisher = messagePublisher;            
         }
 
@@ -93,7 +93,7 @@ namespace ShipManagementService.App.Messaging
         {
             var Service = JsonSerializer.Deserialize<Service>(message);
 
-            await _serviceRepository.CreateShipService(Service);
+            await _shipServiceRepository.CreateShipService(Service);
 
             return true;
         }
@@ -102,7 +102,7 @@ namespace ShipManagementService.App.Messaging
         {
             var Service = JsonSerializer.Deserialize<Service>(message);
 
-            await _serviceRepository.UpdateShipService(Service);
+            await _shipServiceRepository.UpdateShipService(Service);
 
             return true;
         }
@@ -111,7 +111,7 @@ namespace ShipManagementService.App.Messaging
         {
             var Service = JsonSerializer.Deserialize<Service>(message);
 
-            await _serviceRepository.DeleteShipService(Service.Id);
+            await _shipServiceRepository.DeleteShipService(Service.Id);
 
             return true;
         }
@@ -123,7 +123,7 @@ namespace ShipManagementService.App.Messaging
 
             await _messagePublisher.PublishMessageAsync(MessageTypes.ShipDocked, Ship.Id);
 
-            await _shipRepository.CreateShip(Ship);
+            await _shipRepository.CreateShip(Ship.Id);
 
             return true;
         }

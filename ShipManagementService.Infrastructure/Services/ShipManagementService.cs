@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace ShipManagementService.Infrastructure.Services
 {
-    public class ServiceRequest : IServiceRequest
+    public class ShipManagementService : IShipManagementService
     {
-        private readonly IMessagePublisher _imessagePublisher;
+        private readonly IMessagePublisher _messagePublisher;
 
-        public ServiceRequest(IMessagePublisher imessagePublisher)
+        public ShipManagementService(IMessagePublisher messagePublisher)
         {
-            _imessagePublisher = imessagePublisher;
+            _messagePublisher = messagePublisher;
         }
 
         public async Task<Service> SendServiceRequest(Service Service)
         {
-            await _imessagePublisher.PublishMessageAsync(MessageTypes.ServiceRequested, Service.Id);
+            await _messagePublisher.PublishMessageAsync(MessageTypes.ServiceRequested, Service.Id);
             return Service;
         }
     }

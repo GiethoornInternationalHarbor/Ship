@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ShipManagementService.App.Controllers
 {
-    [Route("api/v1/ship")]
+    [Route("api/ship")]
     public class ShipController : ControllerBase
     {
         private readonly IShipService _shipservice;
@@ -18,15 +18,13 @@ namespace ShipManagementService.App.Controllers
         [HttpPost]
         public async Task<Ship> ShipUndockRequested(Ship Ship)
         {
-            var ShipUndockRequest = await _shipservice.ShipUndockRequested(Ship);
-            return ShipUndockRequest;
+            return await _shipservice.ShipUndockRequested(Ship);
         }
 
         [HttpPost]
         public async Task<Ship> ShipNearingHarbor(Ship Ship)
         {
-            var ShipNearby = await _shipservice.ShipNearingHarbor(Ship);
-            return ShipNearby;
+            return await _shipservice.ShipNearingHarbor(Ship);
         }
     }
 }

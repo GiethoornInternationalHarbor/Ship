@@ -16,7 +16,7 @@ namespace ShipManagementService.Infrastructure.Repositories
             _shipManagementDbContextFactory = shipManagementDbContextFactory;
         }
 
-        public async Task<Ship> CreateShip(Ship ship)
+        public async Task<Ship> CreateShip(string shipId, string customerId, string shipName)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
             var CreatingShip = (await dbContext.Ship.AddAsync(ship)).Entity;
@@ -24,7 +24,7 @@ namespace ShipManagementService.Infrastructure.Repositories
             return CreatingShip;
         }
 
-        public async Task DeleteShip(Guid id)
+        public async Task DeleteShip(string id)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
             var shipToDelete = new Ship() { Id = id };

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShipManagementService.Infrastructure.Repositories
 {
-    public class ServiceRepository : IServiceRepository
+    public class ServiceRepository : IShipServiceRepository
     {
         private readonly ShipManagementDbContextFactory _shipManagementDbContextFactory;
         

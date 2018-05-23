@@ -9,9 +9,9 @@ namespace ShipManagementService.Core.Repositories
         /// <summary>
         /// Gets the customer asynchronous.
         /// </summary>
-        /// <param name="email">The email.</param>
+        /// <param name="id">The id.</param>
         /// <returns></returns>
-        Task<Customer> GetCustomerAsync(string email);
+        Task<Customer> GetCustomerAsync(string id);
 
         /// <summary>
         /// Creates the customer asynchronous.

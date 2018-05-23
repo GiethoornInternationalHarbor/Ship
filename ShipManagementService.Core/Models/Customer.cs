@@ -6,7 +6,7 @@ namespace ShipManagementService.Core.Models
     {
         [Required]
         [Key]
-        public string Email { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string Address { get; set; }
