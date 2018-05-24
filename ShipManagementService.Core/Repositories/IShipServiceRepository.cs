@@ -25,6 +25,6 @@ namespace ShipManagementService.Core.Repositories
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        Task DeleteShipService(Guid id);
+        Task DeleteShipService(string id);
     }
 }

@@ -1,7 +1,4 @@
 ﻿using ShipManagementService.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShipManagementService.Core.Repositories
@@ -13,7 +10,15 @@ namespace ShipManagementService.Core.Repositories
         /// </summary>
         /// <param name="ship">The ship.</param>
         /// <returns></returns>
-        Task<Ship> CreateShip(string shipId, string customerId, string shipName);
+        Task<Ship> GetShip(string shipId);
+
+
+        /// <summary>
+        /// Creates the ship.
+        /// </summary>
+        /// <param name="ship">The ship.</param>
+        /// <returns></returns>
+        Task<Ship> CreateShip(Ship ship);
 
         /// <summary>
         /// Updates the ship.

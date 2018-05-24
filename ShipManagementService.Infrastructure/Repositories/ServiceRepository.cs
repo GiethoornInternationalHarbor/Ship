@@ -32,7 +32,7 @@ namespace ShipManagementService.Infrastructure.Repositories
             return updatedShipService.Entity;
         }
 
-        public async Task DeleteShipService(Guid id)
+        public async Task DeleteShipService(string id)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
             var DeletingShipService = new Service() { Id = id };

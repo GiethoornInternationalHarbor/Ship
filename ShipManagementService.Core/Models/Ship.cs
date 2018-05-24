@@ -11,6 +11,8 @@ namespace ShipManagementService.Core.Models
 		/// </summary>
 		[Required]
         [Key]
-        public Guid Id { get; set; }
+        public string ShipID { get; set; }
+
+        public string ShipName { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using ShipManagementService.Core.Models;
 using ShipManagementService.Core.Repositories;
 using ShipManagementService.Infrastructure.Database;
-using System;
 using System.Threading.Tasks;
 
 namespace ShipManagementService.Infrastructure.Repositories
@@ -16,7 +15,13 @@ namespace ShipManagementService.Infrastructure.Repositories
             _shipManagementDbContextFactory = shipManagementDbContextFactory;
         }
 
-        public async Task<Ship> CreateShip(string shipId, string customerId, string shipName)
+        public Task<Ship> GetShip(string id)
+        {
+            ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
+            return dbContext.Ship.LastOrDefaultAsync(x => x.ShipID == id);
+        }
+
+        public async Task<Ship> CreateShip(Ship ship)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
             var CreatingShip = (await dbContext.Ship.AddAsync(ship)).Entity;
@@ -24,10 +29,10 @@ namespace ShipManagementService.Infrastructure.Repositories
             return CreatingShip;
         }
 
-        public async Task DeleteShip(string id)
+        public async Task DeleteShip(string shipId)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
-            var shipToDelete = new Ship() { Id = id };
+            var shipToDelete = new Ship() { ShipID = shipId };
             dbContext.Entry(shipToDelete).State = EntityState.Deleted;
             await dbContext.SaveChangesAsync();
         }

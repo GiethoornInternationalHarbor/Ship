@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShipManagementService.Core.Messaging;
 using ShipManagementService.Core.Models;
 using ShipManagementService.Core.Services;
 using System.Threading.Tasks;
 
 namespace ShipManagementService.App.Controllers
-{   
+{
     [Route("api/shipmanagement")]
     public class ShipManagementController : ControllerBase
     {

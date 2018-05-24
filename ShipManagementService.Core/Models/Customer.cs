@@ -7,14 +7,5 @@ namespace ShipManagementService.Core.Models
         [Required]
         [Key]
         public string Id { get; set; }
-
-        [Required]
-        public string Address { get; set; }
-
-        [Required]
-        public string PostalCode { get; set; }
-
-        [Required]
-        public string Residence { get; set; }
     }
 }

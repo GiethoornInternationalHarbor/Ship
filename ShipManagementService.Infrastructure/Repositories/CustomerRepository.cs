@@ -33,10 +33,10 @@ namespace ShipManagementService.Infrastructure.Repositories
             return DeletedCustomer.Entity;
         }
 
-        public Task<Customer> GetCustomerAsync(string email)
+        public Task<Customer> GetCustomerAsync(string id)
         {
             ShipManagementDbContext dbContext = _shipManagementDbFactory.CreateDbContext();
-            return dbContext.Customers.LastOrDefaultAsync(x => x.Email == email);
+            return dbContext.Customers.LastOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Customer> UpdateCustomerAsync(Customer customer)
