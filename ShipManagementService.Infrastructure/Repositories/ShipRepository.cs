@@ -18,7 +18,7 @@ namespace ShipManagementService.Infrastructure.Repositories
         public Task<Ship> GetShip(string id)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
-            return dbContext.Ship.LastOrDefaultAsync(x => x.ShipID == id);
+            return dbContext.Ship.LastOrDefaultAsync(x => x.ShipId == id);
         }
 
         public async Task<Ship> CreateShip(Ship ship)
@@ -32,7 +32,7 @@ namespace ShipManagementService.Infrastructure.Repositories
         public async Task DeleteShip(string shipId)
         {
             ShipManagementDbContext dbContext = _shipManagementDbContextFactory.CreateDbContext();
-            var shipToDelete = new Ship() { ShipID = shipId };
+            var shipToDelete = new Ship() {ShipId = shipId };
             dbContext.Entry(shipToDelete).State = EntityState.Deleted;
             await dbContext.SaveChangesAsync();
         }

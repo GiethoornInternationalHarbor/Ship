@@ -16,13 +16,13 @@ namespace ShipManagementService.Infrastructure.Services
 
         public async Task<Ship> ShipNearingHarbor(Ship Ship)
         {
-           await _imessagePublisher.PublishMessageAsync(MessageTypes.ShipNearingHarbor, Ship.ShipID);
+           await _imessagePublisher.PublishMessageAsync(MessageTypes.ShipNearingHarbor, Ship.ShipId);
            return Ship;
         }
 
         public async Task<Ship> ShipUndockRequested(Ship Ship)
         {
-            await _imessagePublisher.PublishMessageAsync(MessageTypes.ShipUndockRequested, Ship.ShipID);
+            await _imessagePublisher.PublishMessageAsync(MessageTypes.ShipUndockRequested, Ship.ShipId);
             return Ship;
         }
     }

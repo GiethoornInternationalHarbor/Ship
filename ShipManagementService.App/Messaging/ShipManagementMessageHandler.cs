@@ -121,20 +121,20 @@ namespace ShipManagementService.App.Messaging
         {
             var Ship = JsonSerializer.Deserialize<Ship>(message);
 
-            await _messagePublisher.PublishMessageAsync(MessageTypes.ShipDocked, Ship.ShipID);
+            //await _messagePublisher.PublishMessageAsync(MessageTypes.ShipDocked, Ship.ShipID);
 
-            await _shipRepository.CreateShip(Ship);
+            //await _shipRepository.CreateShip(Ship);
 
             return true;
         }
 
         private async Task<bool> HandleShipUndocked(string message)
         {
-            var Ship = JsonSerializer.Deserialize<Ship>(message);
+            var ShipDock = JsonSerializer.Deserialize<Ship>(message);
 
-            await _messagePublisher.PublishMessageAsync(MessageTypes.ShipUndocked, Ship.ShipID);
+            //await _messagePublisher.PublishMessageAsync(MessageTypes.ShipUndocked, ShipDock.ShipId);
 
-            await _shipRepository.DeleteShip(Ship.ShipID);
+            //await _shipRepository.DeleteShip(ShipDock.ShipId);
 
             return true;
         }
